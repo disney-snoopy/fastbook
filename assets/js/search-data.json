@@ -4,9 +4,9 @@
         "post0": {
             "title": "Pytorch Tensor: Adding a new axis",
             "content": "import numpy as np import torch . You may wanna add a new axis to a Pytorch tensor. For Numpy arrays, the operation can be carried out using new axis code. . a = np.ones(3) print(&#39;Original array: &#39;, a) b = a[:, np.newaxis] print(&#39;Modified array: n&#39;,b) . Original array: [1. 1. 1.] Modified array: [[1.] [1.] [1.]] . For Pytorch tensor, the same operation can be done using None index. . a = torch.ones(3) print(&#39;Original tensor: &#39;,a) b = a[:,None] print(&#39;Modified tensor: n&#39;, b) . Original tensor: tensor([1., 1., 1.]) Modified tensor: tensor([[1.], [1.], [1.]]) .",
-            "url": "https://disney-snoopy.github.io/fastbook/pytorch/2020/12/10/adding_newaxis.html",
-            "relUrl": "/pytorch/2020/12/10/adding_newaxis.html",
-            "date": " • Dec 10, 2020"
+            "url": "https://disney-snoopy.github.io/fastbook/pytorch/2020/12/11/Pytorch_adding_newaxis.html",
+            "relUrl": "/pytorch/2020/12/11/Pytorch_adding_newaxis.html",
+            "date": " • Dec 11, 2020"
         }
         
     
