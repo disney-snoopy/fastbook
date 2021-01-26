@@ -96,7 +96,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      9 min read
+      11 min read
     
 </span></p>
 
@@ -152,20 +152,22 @@ window.onload = wrap_img;
 <p>1) Many statistical tests and scores (including t-test and z-score) <strong>assume that the population distribution follows normal distribution.</strong></p>
 <p>2) However, many real life data do not follow normal distribution.</p>
 <p>3) Central limit theorem (CLT) allows you to assume that the mean of any data is normally distributed <strong>as long as your sample size is large enough.</strong></p>
-<p>4) Skewness and kurtosis can be used to test the normality of distribution. <strong>Normal distribution has both skewness and kurtosis of 0.</strong> For formal normality test using skewness and kurtosis, check out <a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque–Bera test</a>.</p>
+<p>4) Skewness and kurtosis can be used to test the normality of a distribution. <strong>Normal distribution has both skewness and kurtosis of 0.</strong> If your distribution has skewness and kurtosis significantly different from 0, you may want to increase your sample size. For formal normality test using skewness and kurtosis, check out <a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque–Bera test</a>.</p>
+<p>5) The more samples you take, the closer the distribution of means follow normal distribution. But increasing the sample size is often very expensive in real life. Imagine having to increase the size of your clinical trial. So there is a trade off, you can either ensure the normality by increasing the sample size or risk working with a distribution that may differ significantly from normal distribution.</p>
+<p><strong>You barely have a dataset containing the entire population! All these statistical procedures to approximate the population data from whatever data we have access to!</strong></p>
 <p>For formal proof of central limit theorem, check <a href="https://www.cs.toronto.edu/~yuvalf/CLT.pdf">this paper.</a></p>
 <p><font size="5">Normal Distribution (Gaussian Distribution)</font></p>
 <p>Normal distribution is perhaps one of the most widely used distributions. It has many unique properties but ones that I find relevant to our lectures are listed below.</p>
 <p>1) Normal distribution is defined by two parameters, mean ($\mu$) and standard variation ($\sigma$). <strong>Once you know the two parameters, you can map the entire probability distribution function (pdf)</strong>.</p>
 $$
 x \backsim N(\mu, \sigma^2)
-$$<p>Above expression simply means variable x is distributed according to a normal distribution with mean $\mu$ and variance $\sigma^2$ (variance = $\sigma^2$). Although some mathematical expressions can
+$$<p>Above expression simply means random variable x is distributed according to a normal distribution with mean $\mu$ and variance $\sigma^2$ (variance = $\text{standard deviation}^2$). Although some mathematical expressions can
 look intimidating, most of them have really simple meaning.</p>
 $$
 p(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \left({\frac{x-\mu}{\sigma}}\right)^2}
 $$<p>Above is the pdf of a normal distribution. $\pi$ and $e$ are constants, meaning $p(x)$ only depends on $x, \mu$ and $\sigma$.</p>
 <p>2) <strong>68, 95, 99.7 rule.</strong></p>
-<p>Approximately 68%, 95% and 99.7% of values in the distribution are within 1, 2 and 3 SDs of the mean, i.e., above or below. This allows easier probablistic interpretation of data (more in next paragraph).</p>
+<p>Approximately 68%, 95% and 99.7% of values in the distribution are within 1, 2 and 3 SDs of the mean, i.e., above or below. This allows easier probablistic interpretation of data (more in the next paragraph).</p>
 
 </div>
 </div>
@@ -245,6 +247,7 @@ $$<p>Above is the pdf of a normal distribution. $\pi$ and $e$ are constants, mea
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Area under curve represents the cumulative probability within the region. You can integrate the probability distribution function to obtain area under curve. PDF is merely a mathmatical function which can be easily integrated analytically.</p>
+<p>3) Many variables that we see in nature appear to have a probability density function that approximates a normal distribution. If we think about random biological or physical processes, they can often be viewed as being affected by a large number of random processes with individually small effects. That's why disciplines such as bioengineering often assume normality. Check <a href="https://aidanlyon.com/normal_distributions.pdf">this paper</a> to see why so many natural phenomena follow normal distribution.</p>
 
 </div>
 </div>
@@ -330,8 +333,9 @@ $$<p>Above is the pdf of a normal distribution. $\pi$ and $e$ are constants, mea
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Caveats</strong></p>
-<p>1) In order to use z-score, <strong>you need a good approximation of population mean and standard derivation.</strong> This may not be the case.</p>
-<p>2) Z-score lets you compare your data against the entire population. This approach often lacks control for inferential statistics. Even if your new cancer treatment produces better clinical outcome compare to the entire population of cancer patients globally, it does not mean much. You want to have a strict control over the variables that might affect the outcome such as patient ethnicity, underlying medical conditions and the choice of treatment. As a result, many scientific research use t-test which allows the comparison between two groups of samples -such as novel treatment group vs. control group (conventional treatment group). Also, there are test you can use to compare more than 2 groups such as ANOVA test.</p>
+<p>1) In order to use z-score, <strong>you need a good approximation of population mean and standard derivation.</strong> This may not be the case. If your you don't have a very good estimation of population standard deviation, you should use one sample t-test rather than z-test</p>
+<p>2) Similarly, if you are compariing two groups, you should use tests such as two sample t-test. If you are comparing two groups of cancer patients (novel treatment group vs control group), we are not comparing with a group against the entire population. We are comapring between two groups.</p>
+<p>2) Even if your new cancer treatment produces better clinical outcome compare to the entire population of cancer patients globally, it does not mean much. You want to have a strict control over the variables that might affect the outcome such as patient ethnicity, underlying medical conditions and the choice of treatment. As a result, many scientific research use t-test which allows the comparison between two groups of samples. Also, there are test you can use to compare more than 2 groups such as ANOVA test.</p>
 
 </div>
 </div>
@@ -729,7 +733,7 @@ $$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Your observation is 2.24 standard deviations away from mean! It is actually very unlikely to suvey 3000 people and get the average of 39000 when the population mean is 37530!</p>
+<p>Your observation is 2.24 standard deviations away from mean! It is actually very unlikely to suvey 3000 people and get the average of 39000!</p>
 
 </div>
 </div>
