@@ -172,10 +172,10 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Summary">Summary<a class="anchor-link" href="#Summary"> </a></h1><p><strong>Central Limit Theorem</strong></p>
-<p>1) Many statistical tests and scores (including t-test and z-score) <strong>assume that the population distribution is normally distribution.</strong>
-2) However, many real life distributions do not follow normal distribution.
-3) Central limit theorem (CLT) allows you to assume that the data is normally distributed <strong>as long as your sample size is large enough and you are taking the mean.</strong>
-4) Skewness and kurtosis can be used to test the normality of distribution. <strong>Normal distribution has both skewness and kurtosis of 0.</strong> For formal normality test using skewness and kurtosis, check out <a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque–Bera test</a></p>
+<p>1) Many statistical tests and scores (including t-test and z-score) <strong>assume that the population distribution follows normally distribution.</strong></p>
+<p>2) However, many real life data do not follow normal distribution.</p>
+<p>3) Central limit theorem (CLT) allows you to assume that the data is normally distributed <strong>as long as your sample size is large enough.</strong></p>
+<p>4) Skewness and kurtosis can be used to test the normality of distribution. <strong>Normal distribution has both skewness and kurtosis of 0.</strong> For formal normality test using skewness and kurtosis, check out <a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque–Bera test</a>.</p>
 <p>For formal proof of central limit theorem, check <a href="https://www.cs.toronto.edu/~yuvalf/CLT.pdf">this paper.</a></p>
 <p><strong>Normal Distribution (Gaussian Distribution)</strong></p>
 <p>Normal distribution is perhaps one of the most widely used distributions. It has many unique properties but ones that I find relevant to our lectures are listed below.</p>
@@ -358,7 +358,7 @@ $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Caveats</strong></p>
 <p>1) In order to use z-score, <strong>you need a good approximation of population mean and standard derivation.</strong> This may not be the case.
-2) Z-score lets you compare your data against the entire population. This approach often lacks control for inferential statistics. Even if your new cancer treatment produces better clinical outcome compare to the entire population of cancer patients globally, it does not mean much. You want to have a strict control over the variables that might affect the outcome such as patient ethnicity, underlying medical conditions and the choice of treatment. As a result, many scientific research use t-test which allows the comparison between two groups of samples -such as novel treatment group vs. control group (conventional treatment group).</p>
+2) Z-score lets you compare your data against the entire population. This approach often lacks control for inferential statistics. Even if your new cancer treatment produces better clinical outcome compare to the entire population of cancer patients globally, it does not mean much. You want to have a strict control over the variables that might affect the outcome such as patient ethnicity, underlying medical conditions and the choice of treatment. As a result, many scientific research use t-test which allows the comparison between two groups of samples -such as novel treatment group vs. control group (conventional treatment group). Also, there are test you can use to compare more than 2 groups such as ANOVA test.</p>
 
 </div>
 </div>
