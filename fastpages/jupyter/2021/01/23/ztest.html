@@ -159,20 +159,13 @@ window.onload = wrap_img;
 <p>1) Normal distribution is defined by two parameters, mean ($\mu$) and standard variation ($\sigma$). <strong>Once you know the two parameters, you can map the entire probability distribution function (pdf)</strong>.</p>
 $$
 x \backsim N(\mu, \sigma^2)
-$$
-<pre><code>Above expression simply means variable x is distributed according to a normal distribution with mean $\mu$ and variance $\sigma^2$ (variance = $\sigma^2$). Although some mathematical expressions can
-look intimidating, most of them have really simple meaning.
-
-</code></pre>
+$$<p>Above expression simply means variable x is distributed according to a normal distribution with mean $\mu$ and variance $\sigma^2$ (variance = $\sigma^2$). Although some mathematical expressions can
+look intimidating, most of them have really simple meaning.</p>
 $$
 p(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \left({\frac{x-\mu}{\sigma}}\right)^2}
-$$
-<pre><code>Above is the pdf of a normal distribution. $\pi$ and $e$ are constants, meaning $p(x)$ only depends on $x, \mu$ and $\sigma$.
-
-</code></pre>
+$$<p>Above is the pdf of a normal distribution. $\pi$ and $e$ are constants, meaning $p(x)$ only depends on $x, \mu$ and $\sigma$.</p>
 <p>2) <strong>68, 95, 99.7 rule.</strong></p>
-
-<pre><code>Approximately 68%, 95% and 99.7% of values in the distribution are within 1, 2 and 3 SDs of the mean, i.e., above or below. This allows easier probablistic interpretation of data (more in next paragraph).</code></pre>
+<p>Approximately 68%, 95% and 99.7% of values in the distribution are within 1, 2 and 3 SDs of the mean, i.e., above or below. This allows easier probablistic interpretation of data (more in next paragraph).</p>
 
 </div>
 </div>
@@ -334,8 +327,8 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Caveats</strong></p>
-<p>1) In order to use z-score, <strong>you need a good approximation of population mean and standard derivation.</strong> This may not be the case.
-2) Z-score lets you compare your data against the entire population. This approach often lacks control for inferential statistics. Even if your new cancer treatment produces better clinical outcome compare to the entire population of cancer patients globally, it does not mean much. You want to have a strict control over the variables that might affect the outcome such as patient ethnicity, underlying medical conditions and the choice of treatment. As a result, many scientific research use t-test which allows the comparison between two groups of samples -such as novel treatment group vs. control group (conventional treatment group). Also, there are test you can use to compare more than 2 groups such as ANOVA test.</p>
+<p>1) In order to use z-score, <strong>you need a good approximation of population mean and standard derivation.</strong> This may not be the case.</p>
+<p>2) Z-score lets you compare your data against the entire population. This approach often lacks control for inferential statistics. Even if your new cancer treatment produces better clinical outcome compare to the entire population of cancer patients globally, it does not mean much. You want to have a strict control over the variables that might affect the outcome such as patient ethnicity, underlying medical conditions and the choice of treatment. As a result, many scientific research use t-test which allows the comparison between two groups of samples -such as novel treatment group vs. control group (conventional treatment group). Also, there are test you can use to compare more than 2 groups such as ANOVA test.</p>
 
 </div>
 </div>
@@ -516,9 +509,12 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ol>
-<li>The data count represents about 65 million individuals (1 count for 1000 individuals). The entire population of the UK is about 67 million, so we have the data on almost the entire population.</li>
-<li>Mean is larger than median, indicating positive skew.</li>
-<li>Standard deviation is about £36,260.</li>
+<li><p>The data count represents about 65 million individuals (1 count for 1000 individuals). The entire population of the UK is about 67 million, so we have the data on almost the entire population.</p>
+</li>
+<li><p>Mean is larger than median, indicating positive skew.</p>
+</li>
+<li><p>Standard deviation is about £36,260.</p>
+</li>
 </ol>
 
 </div>
@@ -923,9 +919,9 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From the culumative distribution function, we know that the probability of getting a sample mean further than 2.24 stds away from mean is only 2.5%.</p>
-<p>So what does that imply?
-1) It means you got a truly unlikely result only if you have truly randomly sampled from the entire population.
-2) If you have only sampled from your neighborhood and thereby imposed control over your sample population, it can be a good reason to reject the null hypothesis and conclude that the difference between the income in your neightborhood is significantly different than the national average.</p>
+<p>So what does that imply?</p>
+<p>1) It means you got a truly unlikely result only if you have truly randomly sampled from the entire population.</p>
+<p>2) If you have only sampled from your neighborhood and thereby imposed control over your sample population, it can be a good reason to reject the null hypothesis and conclude that the difference between the income in your neightborhood is significantly different than the national average.</p>
 <p><strong>Null hypothesis</strong>: The average income in your neighborhood does not differ from the national average.</p>
 <p><strong>Alternative hypothesis</strong>: The average income in your neighborhood differ from the national average.</p>
 <p>You can reject the null hypothesis with the p-value of 0.025. This means if the null hypothesis holds, there is only 2.5% chance of getting a result such as yours by pure chance.</p>
