@@ -151,7 +151,7 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation"> </a></h2>
+<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation"> </a></h1>
 </div>
 </div>
 </div>
@@ -167,7 +167,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Derivation">Derivation<a class="anchor-link" href="#Derivation"> </a></h2>
+<h1 id="Derivation">Derivation<a class="anchor-link" href="#Derivation"> </a></h1>
 </div>
 </div>
 </div>
@@ -180,7 +180,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Derivation-of-Likelihood-Function">Derivation of Likelihood Function<a class="anchor-link" href="#Derivation-of-Likelihood-Function"> </a></h3>
+<h2 id="Derivation-of-Likelihood-Function">Derivation of Likelihood Function<a class="anchor-link" href="#Derivation-of-Likelihood-Function"> </a></h2>
 </div>
 </div>
 </div>
@@ -250,7 +250,7 @@ Note that it's no longer a function of individual data points ($x^{(i)}, y^{(i)}
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Maximum-Likelihood-Estimation">Maximum Likelihood Estimation<a class="anchor-link" href="#Maximum-Likelihood-Estimation"> </a></h3>
+<h2 id="Maximum-Likelihood-Estimation">Maximum Likelihood Estimation<a class="anchor-link" href="#Maximum-Likelihood-Estimation"> </a></h2>
 </div>
 </div>
 </div>
@@ -294,13 +294,13 @@ This is the familiar squared error! So using squared error as a loss function to
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Solving-for-Regression-Coefficients">Solving for Regression Coefficients<a class="anchor-link" href="#Solving-for-Regression-Coefficients"> </a></h3>
+<h1 id="Solving-for-Regression-Coefficients">Solving for Regression Coefficients<a class="anchor-link" href="#Solving-for-Regression-Coefficients"> </a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Closed-form-solution">Closed form solution<a class="anchor-link" href="#Closed-form-solution"> </a></h4><p>Finding $\theta$s for minimum mean squared error is a convex optimisation problem and has a nice closed form solution. Closed form solution allows us to solve for $\theta\$s without iterative algorithm.</p>
+<h2 id="Closed-form-solution">Closed form solution<a class="anchor-link" href="#Closed-form-solution"> </a></h2><p>Finding $\theta$s for minimum mean squared error is a convex optimisation problem and has a nice closed form solution. Closed form solution allows us to solve for $\theta\$s without iterative algorithm.</p>
 <p>We can express n-dimensional independent variables in a matrix form.
 $$
 \begin{aligned}
@@ -402,7 +402,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Iterative-Algorithm">Iterative Algorithm<a class="anchor-link" href="#Iterative-Algorithm"> </a></h4>
+<h2 id="Iterative-Algorithm">Iterative Algorithm<a class="anchor-link" href="#Iterative-Algorithm"> </a></h2>
 </div>
 </div>
 </div>
@@ -461,7 +461,7 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The gradient descent concept is an intuitive and practical way of minimising a target function. It is widely used in many machine learning models including deep learning.</p>
-<h4 id="Gradient-Descent-vs.-Normal-eq.">Gradient Descent vs. Normal eq.<a class="anchor-link" href="#Gradient-Descent-vs.-Normal-eq."> </a></h4><p>In case of linear regression, one can use Normal equation without having to use gradient descent. However, as the size of the dataset grows, the computational cost of Normal equation rapidly increases. The computation complexity of the Normal equation is approximately $\mathcal{O}(i^2j)$ where i is the number of training samples and j is the number of features. So  one may get faster solution by using gradient descent.</p>
+<h3 id="Gradient-Descent-vs.-Normal-eq.">Gradient Descent vs. Normal eq.<a class="anchor-link" href="#Gradient-Descent-vs.-Normal-eq."> </a></h3><p>In case of linear regression, one can use Normal equation without having to use gradient descent. However, as the size of the dataset grows, the computational cost of Normal equation rapidly increases. The computation complexity of the Normal equation is approximately $\mathcal{O}(i^2j)$ where i is the number of training samples and j is the number of features. So  one may get faster solution by using gradient descent.</p>
 <p>For large datasets, variations of gradient descent such as stochastic gradient descent and mini-batch gradient descent offer even faster convergence.</p>
 
 </div>
