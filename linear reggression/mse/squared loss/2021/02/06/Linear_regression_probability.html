@@ -203,26 +203,28 @@ $$<p>where the $\theta$s are the regression coefficients and $x_i$ is the $i^{th
 <p>As in the housing price prediction challenge, $h(x)$ is the predicted price of the house, $\theta_1$ is the general living area, $\theta_2$ is the number of bedrooms and so on.</p>
 <p>Using the hypothesis function, we can now model how the independent vairable and the dependent variables are related:
 $$
-\begin{equation}
+\begin{aligned}
 y^i = \theta^Tx^{i} + \epsilon^{i}
-\end{equation}
+\end{aligned}
 $$
 where $\epsilon^{i}$ is an error that captures random noise and unmodelled effects. Let's further assume that $\epsilon^{i}$ are distributed according to a Gaussian distribution (Normal distribution) and are IID (independently and identically distributed) with mean zero and variance $\sigma^2$. IID implies that residuals are not related to each other and they are sampled from the same distribution. The justification for assuming residual normality is based on central limit theorem. For more in-depth intuition on why so many things in the world are distributed according to Normal distribution, hence the name Normal, refer to this <a href="https://academic.oup.com/bjps/article-abstract/65/3/621/1497281?redirectedFrom=fulltext">paper</a>.</p>
 <p>Above assumptions can be written in mathematical notations:</p>
 $$
-\begin{equation}
+\begin{aligned}
 \epsilon^{i} \sim  \mathcal{N}(0, \sigma^2)
-\end{equation}
+\end{aligned}
 $$<p>The probability density function (pdf) of Gaussian distribution is given by
 $$
-\begin{equation}
+\begin{aligned}
 p(\epsilon^{i}) = \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(\epsilon^{i})^2}{2\sigma^2}\bigr)
-\end{equation}
+\end{aligned}
 $$
 from equation 4 and 6,
 $$
 \begin{equation}
+\begin{aligned}
 p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(y^{i}-\theta^Tx^{i})^2}{2\sigma^2}\bigr)
+\end{aligned}
 \end{equation}
 $$</p>
 <p>Let's examine what equation 7 implies. $p(y^{(i)}|x^{(i)};\theta)$ indicates that it's the distribution of y given x and it is parameterised by $\theta$. From a set of assumptions, we have described the probability of y in terms of x and $\theta$. This can be also expressed as a distribution of y given x:
@@ -233,12 +235,14 @@ y^{(i)}|x^{(i)};\theta \sim \mathcal{N}(\theta^Tx^{(i)}, \sigma^2)
 $$</p>
 <p>Now we can express the probability of getting certain y given x with fixed $\theta$. But what we are truly interested in is finding $\theta$ that maximises this probability. So we will explicitly write the above expression as a function of $\theta$. This function is also called likelihood function.
 $$
-\begin{align}
+\begin{equation}
+\begin{aligned}
 L(\theta) 
 &amp;= L(\theta; X, \vec {y}) \\
 &amp;= p(\vec{y}|X;\theta) \\
 &amp;= \prod_{i=1}^{n} p(y^{(i)}|x^{(i)};\theta)
-\end{align}
+\end{aligned}
+\end{equation}
 $$
 Note that it's no longer a function of individual data points ($x^{(i)}, y^{(i)}$), but it is a function of your entire training data. $X$ is the feature matrix (containing features for each sample) and $\vec{y}$ is the target vector. Meaning that the likelihood considers every data point we have provided.</p>
 
@@ -253,13 +257,11 @@ Note that it's no longer a function of individual data points ($x^{(i)}, y^{(i)}
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Maximum likelihood estimation (MSE) is a method of estimating distribution parameters by maximising the likelihood function. Eq.8 states the distribution whose distribution parameter we are interested in. As we will discover in this section, variance ($\sigma^2$) does not affect the result of MSE. So the only distribution parameter we are interested in is the mean of the Normal distribution, $\theta^Tx^{(i)}$</p>
+<p>Maximum likelihood estimation (MSE) is a method of estimating distribution parameters by maximising the likelihood function. Eq.2 states the distribution whose distribution parameter we are interested in. As we will discover in this section, variance ($\sigma^2$) does not affect the result of MSE. So the only distribution parameter we are interested in is the mean of the Normal distribution, $\theta^Tx^{(i)}$</p>
 <p>We will find the optimal $\theta$s using the derivative test. A derivative test is based on the fact that at the maximum, the derivative of the likelihood with respect to $\theta$s is zero.</p>
-<p>Combining eq.11 and eq.7,</p>
+<p>Combining eq.1 and eq.3,</p>
 $$
-\begin{equation}
 L(\theta) = \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(y^{(i)}- \theta^T x^{(i)})^2} {2\sigma^2}         \bigr)
-\end{equation}
 $$<p>This function is pretty complex to differentiate, especially due to the existence of $\Pi$. Instead of maximising $L(\theta)$, we will maximise $log(L(\theta))$ which make the derivation simpler by converting $\Pi$ to $\Sigma$. log is a strictly monotonically increasing function which means the $\theta$s that maximise the log likelihood will also maximise the likelihood.</p>
 
 </div>
@@ -268,13 +270,13 @@ $$<p>This function is pretty complex to differentiate, especially due to the exi
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 $$
-\begin{align}
+\begin{aligned}
 l(\theta) 
 &amp; = \log L(\theta)\\
 &amp; = \log \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(y^{(i)}- \theta^T x^{(i)})^2} {2\sigma^2}         \bigr)\\
 &amp; = \sum_{i=1}^{n} \log \bigl ( \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(y^{(i)}- \theta^T x^{(i)})^2} {2\sigma^2}         \bigr) \bigr)\\
 &amp; = n \log \bigl(\frac{1}{\sigma \sqrt{2\pi}}\bigr) - \frac{1}{2\sigma^2} \sum_{i=1}^{n} (y^{(i)} - \theta^Tx^{(i)})^2
-\end{align}
+\end{aligned}
 $$
 </div>
 </div>
@@ -302,7 +304,7 @@ This is the familiar squared error! So using squared error as a loss function to
 <h4 id="Closed-form-solution">Closed form solution<a class="anchor-link" href="#Closed-form-solution"> </a></h4><p>Finding $\theta$s for minimum mean squared error is a convex optimisation problem and has a nice closed form solution. Closed form solution allows us to solve for $\theta\$s without iterative algorithm.</p>
 <p>We can express n-dimensional independent variables in a matrix form.
 $$
-\begin{equation}
+\begin{aligned}
 X=
 \begin{bmatrix}
 \cdots &amp; (x^1)^T &amp; \cdots \\
@@ -310,12 +312,12 @@ X=
   &amp; \vdots &amp; \\
 \cdots &amp; (x^n)^T &amp; \cdots \\
 \end{bmatrix}
-\end{equation}
+\end{aligned}
 $$
 Where X is n x d matrix. d is the number of independent variables. When intersect is considered, the size of X is n x d+1.</p>
 <p>The dependent variable vector is given by:
 $$
-\begin{equation}
+\begin{aligned}
 \vec{y} = 
 \begin{bmatrix}
 y^{(1)}  \\
@@ -323,7 +325,7 @@ y^{(2)}  \\
 \vdots  \\
 y^{(n)}
 \end{bmatrix}
-\end{equation}
+\end{aligned}
 $$</p>
 <p>The regression line $h_\theta(x^{(i)})$ is expressed as
 $$
@@ -332,7 +334,7 @@ $$
 where $\theta$ is a vector containing regression coeffients.</p>
 <p>We can now express residuals as follows:
 $$
-\begin{align}
+\begin{aligned}
 X\theta - \vec{y} &amp; = 
 \begin{bmatrix}
 (x^1)^T\theta  \
@@ -352,27 +354,29 @@ y^{(n)}
 \vdots  \\
 (x^n)^T\theta -y^{(3)} \\
 \end{bmatrix}
-\end{align}
+\end{aligned}
 $$</p>
 <p>From the fact that for a vector z, $z^Tz = \sum_i z_i^2$:
 $$
-\begin{align}
+\begin{aligned}
 \frac{1}{2}(X\theta - \vec{y})^T(X\theta - \vec{y}) &amp; = 
 \frac{1}{2} \sum_{i=0}^{n} (h_\theta (x^{(i)})-y^{(i)})^2\\
 &amp; = J(\theta)
-\end{align}
+\end{aligned}
 $$
 Here, $J(\theta)$ is our cost function which we want to minimise to obtain a least squared error line.</p>
 <p>To minimise J, we need to solve for its derivative with respect to $\theta$:</p>
 $$
-\begin{align}
+\begin{equation}
+\begin{aligned}
 \nabla_\theta J(\theta) &amp;= 
 \nabla_\theta \frac{1}{2} \sum_{i=0}^{n} (h_\theta (x^{(i)})-y^{(i)})^2\\
 &amp; = \frac{1}{2} \nabla_\theta \bigl((X\theta)^T X\theta - (X\theta)^T\vec{y} - \vec{y}^T (X\theta) + \vec{y}^T\vec{y} \bigr)\\
 &amp; =\frac{1}{2} \nabla_\theta \bigl(\theta^T(X^TX)\theta - 2(X^T\vec{y})^T \theta \bigr)\\
 &amp; = \frac{1}{2} (2X^TX\theta - 2X^T\vec{y})\\
 &amp; = X^TX\theta - X^T\vec{y}
-\end{align}
+\end{aligned}
+\end{equation}
 $$<p>In the third step, we used the fact that $a^Tb = b^Ta$ and in the fifth step, we used that $\nabla_x b^Tx = b$ and $\nabla_x^T Ax = 2Ax$ for symmetric matrix A.</p>
 <p>To minimise J, we need to set its derivative to zero:
 $$
@@ -394,7 +398,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Our cost function (eq.21) can be also minimised via iterative steps. We will start with a initial set of $\theta$ and change $\theta$ to make $J(\theta)$ smaller until we converge. Each update step looks like
+<p>Our cost function (eq.4) can be also minimised via iterative steps. We will start with a initial set of $\theta$ and change $\theta$ to make $J(\theta)$ smaller until we converge. Each update step looks like
 $$
 \theta_j := \theta_j - \alpha \frac{\partial}{\partial\theta_j}  J(\theta)
 $$</p>
