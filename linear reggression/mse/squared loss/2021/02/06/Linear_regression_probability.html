@@ -193,12 +193,12 @@ window.onload = wrap_img;
 </ol>
 <p>From the linearity and additivity assumptions, we can model our hypothesis function as a linear function of dependent vairables:</p>
 $$
-\begin{align}
+\begin{aligned}
 h(x)  
 &amp; = \theta_0 + \theta_1x_1 + \cdots + \theta_nx_n\\
 &amp; = \sum_{j=0}^{d} \theta_jx_j\\
 &amp; = \theta^Tx
-\end{align}
+\end{aligned}
 $$<p>where the $\theta$s are the regression coefficients and $x_i$ is the $i^{th}$ feature. Note that $\theta_0$ is the intercept term. d is the number of features.</p>
 <p>As in the housing price prediction challenge, $h(x)$ is the predicted price of the house, $\theta_1$ is the general living area, $\theta_2$ is the number of bedrooms and so on.</p>
 <p>Using the hypothesis function, we can now model how the independent vairable and the dependent variables are related:
@@ -413,13 +413,13 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 $$
-\begin{align}
+\begin{aligned}
 \frac{\partial}{\partial\theta_j}J(\theta) 
 &amp; = \frac{\partial}{\partial\theta_j} \frac{1}{2}(h(x)-y)^2\\
 &amp; = (h(x)-y)\cdot\frac{\partial}{\partial\theta_j}(h(x)-y)\\
 &amp; = (h(x)-y)\cdot\frac{\partial}{\partial\theta_j}\bigl(\sum_{i=0}^{d}\theta_ix_i -y \bigr)\\
 &amp; = (h(x)-y)x_j
-\end{align}
+\end{aligned}
 $$
 </div>
 </div>
