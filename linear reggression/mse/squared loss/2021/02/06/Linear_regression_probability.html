@@ -331,30 +331,42 @@ $$
 h_\theta (x^{(i)}) = (x^{(i)})^{T} \theta
 $$
 where $\theta$ is a vector containing regression coeffients.</p>
-<p>We can now express residuals as follows:
+<p>We can now express residuals as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 $$
-\begin{aligned}
-X\theta - \vec{y} &amp; = 
+X\theta - \vec{y} = 
 \begin{bmatrix}
-(x^1)^T\theta  \
-(x^2)^T\theta  \
-\vdots  \
-(x^n)^T\theta  \</p>
-<h2 id="\end{bmatrix}">\end{bmatrix}<a class="anchor-link" href="#\end{bmatrix}"> </a></h2>\begin{bmatrix}
+(x^1)^T\theta  \\
+(x^2)^T\theta  \\
+\vdots  \\
+(x^n)^T\theta  \\
+\end{bmatrix}
+-
+\begin{bmatrix}
 y^{(1)}  \\
 y^{(2)}  \\
 \vdots  \\
 y^{(n)}
-\end{bmatrix}<p>\
-&amp; = 
+\end{bmatrix}\\
+$$$$
+= 
 \begin{bmatrix}
 (x^1)^T\theta - y^{(1)} \\
 (x^2)^T\theta - y^{(2)} \\
 \vdots  \\
 (x^n)^T\theta -y^{(3)} \\
 \end{bmatrix}
-\end{aligned}
-$$</p>
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>From the fact that for a vector z, $z^Tz = \sum_i z_i^2$:
 $$
 \begin{aligned}
