@@ -206,6 +206,7 @@ $$
 \begin{aligned}
 y^i = \theta^Tx^{i} + \epsilon^{i}
 \end{aligned}
+\tag{eq.1}
 $$
 where $\epsilon^{i}$ is an error that captures random noise and unmodelled effects. Let's further assume that $\epsilon^{i}$ are distributed according to a Gaussian distribution (Normal distribution) and are IID (independently and identically distributed) with mean zero and variance $\sigma^2$. IID implies that residuals are not related to each other and they are sampled from the same distribution. The justification for assuming residual normality is based on central limit theorem. For more in-depth intuition on why so many things in the world are distributed according to Normal distribution, hence the name Normal, refer to this <a href="https://academic.oup.com/bjps/article-abstract/65/3/621/1497281?redirectedFrom=fulltext">paper</a>.</p>
 <p>Above assumptions can be written in mathematical notations:</p>
@@ -218,31 +219,29 @@ $$
 \begin{aligned}
 p(\epsilon^{i}) = \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(\epsilon^{i})^2}{2\sigma^2}\bigr)
 \end{aligned}
+\tag{eq.2}
 $$
-from equation 4 and 6,
+from eq.1 and eq.2,
 $$
-\begin{equation}
 \begin{aligned}
 p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(y^{i}-\theta^Tx^{i})^2}{2\sigma^2}\bigr)
 \end{aligned}
-\end{equation}
+\tag{eq.3}
 $$</p>
-<p>Let's examine what equation 7 implies. $p(y^{(i)}|x^{(i)};\theta)$ indicates that it's the distribution of y given x and it is parameterised by $\theta$. From a set of assumptions, we have described the probability of y in terms of x and $\theta$. This can be also expressed as a distribution of y given x:
+<p>Let's examine what equation 3 implies. $p(y^{(i)}|x^{(i)};\theta)$ indicates that it's the distribution of y given x and it is parameterised by $\theta$. From a set of assumptions, we have described the probability of y in terms of x and $\theta$. This can be also expressed as a distribution of y given x:
 $$
-\begin{equation}
 y^{(i)}|x^{(i)};\theta \sim \mathcal{N}(\theta^Tx^{(i)}, \sigma^2)
-\end{equation}
+\tag{eq.4}
 $$</p>
 <p>Now we can express the probability of getting certain y given x with fixed $\theta$. But what we are truly interested in is finding $\theta$ that maximises this probability. So we will explicitly write the above expression as a function of $\theta$. This function is also called likelihood function.
 $$
-\begin{equation}
 \begin{aligned}
 L(\theta) 
 &amp;= L(\theta; X, \vec {y}) \\
 &amp;= p(\vec{y}|X;\theta) \\
 &amp;= \prod_{i=1}^{n} p(y^{(i)}|x^{(i)};\theta)
 \end{aligned}
-\end{equation}
+\tag{eq.5}
 $$
 Note that it's no longer a function of individual data points ($x^{(i)}, y^{(i)}$), but it is a function of your entire training data. $X$ is the feature matrix (containing features for each sample) and $\vec{y}$ is the target vector. Meaning that the likelihood considers every data point we have provided.</p>
 
@@ -257,9 +256,9 @@ Note that it's no longer a function of individual data points ($x^{(i)}, y^{(i)}
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Maximum likelihood estimation (MSE) is a method of estimating distribution parameters by maximising the likelihood function. Eq.2 states the distribution whose distribution parameter we are interested in. As we will discover in this section, variance ($\sigma^2$) does not affect the result of MSE. So the only distribution parameter we are interested in is the mean of the Normal distribution, $\theta^Tx^{(i)}$</p>
+<p>Maximum likelihood estimation (MSE) is a method of estimating distribution parameters by maximising the likelihood function. Eq.4 states the distribution whose distribution parameter we are interested in. As we will discover in this section, variance ($\sigma^2$) does not affect the result of MSE. So the only distribution parameter we are interested in is the mean of the Normal distribution, $\theta^Tx^{(i)}$</p>
 <p>We will find the optimal $\theta$s using the derivative test. A derivative test is based on the fact that at the maximum, the derivative of the likelihood with respect to $\theta$s is zero.</p>
-<p>Combining eq.1 and eq.3,</p>
+<p>Combining eq.3 and eq.5,</p>
 $$
 L(\theta) = \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} exp \bigl(-\frac{(y^{(i)}- \theta^T x^{(i)})^2} {2\sigma^2}         \bigr)
 $$<p>This function is pretty complex to differentiate, especially due to the existence of $\Pi$. Instead of maximising $L(\theta)$, we will maximise $log(L(\theta))$ which make the derivation simpler by converting $\Pi$ to $\Sigma$. log is a strictly monotonically increasing function which means the $\theta$s that maximise the log likelihood will also maximise the likelihood.</p>
@@ -363,11 +362,11 @@ $$
 \frac{1}{2} \sum_{i=0}^{n} (h_\theta (x^{(i)})-y^{(i)})^2\\
 &amp; = J(\theta)
 \end{aligned}
+\tag{eq.6}
 $$
 Here, $J(\theta)$ is our cost function which we want to minimise to obtain a least squared error line.</p>
 <p>To minimise J, we need to solve for its derivative with respect to $\theta$:</p>
 $$
-\begin{equation}
 \begin{aligned}
 \nabla_\theta J(\theta) &amp;= 
 \nabla_\theta \frac{1}{2} \sum_{i=0}^{n} (h_\theta (x^{(i)})-y^{(i)})^2\\
@@ -376,7 +375,6 @@ $$
 &amp; = \frac{1}{2} (2X^TX\theta - 2X^T\vec{y})\\
 &amp; = X^TX\theta - X^T\vec{y}
 \end{aligned}
-\end{equation}
 $$<p>In the third step, we used the fact that $a^Tb = b^Ta$ and in the fifth step, we used that $\nabla_x b^Tx = b$ and $\nabla_x^T Ax = 2Ax$ for symmetric matrix A.</p>
 <p>To minimise J, we need to set its derivative to zero:
 $$
@@ -398,7 +396,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Our cost function (eq.4) can be also minimised via iterative steps. We will start with a initial set of $\theta$ and change $\theta$ to make $J(\theta)$ smaller until we converge. Each update step looks like
+<p>Our cost function (eq.6) can be also minimised via iterative steps. We will start with a initial set of $\theta$ and change $\theta$ to make $J(\theta)$ smaller until we converge. Each update step looks like
 $$
 \theta_j := \theta_j - \alpha \frac{\partial}{\partial\theta_j}  J(\theta)
 $$</p>
