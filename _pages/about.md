@@ -8,4 +8,4 @@ I believe we can all learn more by sharing ideas. So please reach out in the com
 
 Or you can also send an email to *bjk10@imperial.ac.uk*.
 
-![](https://res.cloudinary.com/dbxctsqiw/image/upload/v1617581098/profile_crop_ctsltw.jpg "https://github.com/fastai/fastpages")
+![](https://res.cloudinary.com/dbxctsqiw/image/upload/v1617581098/profile_crop_ctsltw.jpg)
