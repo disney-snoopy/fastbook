@@ -3,9 +3,9 @@ layout: page
 title: About Me
 permalink: /about/
 ---
+Hi, I'm Jae Kim. I am an aspiring data scientist based in London. This blog is about some aspects of my learning that I would like to share with others.
+I believe we can all learn more by sharing ideas. So please reach out in the comments if you'd like to get in touch.
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+Or you can also send an email to *bjk10@imperial.ac.uk*.
 
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+![](https://res.cloudinary.com/dbxctsqiw/image/upload/v1617581098/profile_crop_ctsltw.jpg "https://github.com/fastai/fastpages")
