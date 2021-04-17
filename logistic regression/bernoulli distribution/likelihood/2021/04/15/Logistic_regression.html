@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Bullet Point Summary of Logistic Regression | Jae Kim - Data Science Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Bullet Point Summary of Logistic Regression" />
+<meta name="author" content="Jae Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Why is logistic regression so special?" />
+<meta property="og:description" content="Why is logistic regression so special?" />
+<link rel="canonical" href="https://disney-snoopy.github.io/fastbook/logistic%20regression/bernoulli%20distribution/likelihood/2021/04/15/Logistic_regression.html" />
+<meta property="og:url" content="https://disney-snoopy.github.io/fastbook/logistic%20regression/bernoulli%20distribution/likelihood/2021/04/15/Logistic_regression.html" />
+<meta property="og:site_name" content="Jae Kim - Data Science Blog" />
+<meta property="og:image" content="https://res.cloudinary.com/dbxctsqiw/image/upload/v1618657153/blog/logistic_puexll.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://disney-snoopy.github.io/fastbook/logistic%20regression/bernoulli%20distribution/likelihood/2021/04/15/Logistic_regression.html","@type":"BlogPosting","headline":"Bullet Point Summary of Logistic Regression","dateModified":"2021-04-15T00:00:00-05:00","datePublished":"2021-04-15T00:00:00-05:00","image":"https://res.cloudinary.com/dbxctsqiw/image/upload/v1618657153/blog/logistic_puexll.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://disney-snoopy.github.io/fastbook/logistic%20regression/bernoulli%20distribution/likelihood/2021/04/15/Logistic_regression.html"},"author":{"@type":"Person","name":"Jae Kim"},"description":"Why is logistic regression so special?","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/fastbook/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://disney-snoopy.github.io/fastbook/feed.xml" title="Jae Kim - Data Science Blog" /><link rel="shortcut icon" type="image/x-icon" href="/fastbook/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/fastbook/">Jae Kim - Data Science Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fastbook/about/">About Me</a><a class="page-link" href="/fastbook/search/">Search</a><a class="page-link" href="/fastbook/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Bullet Point Summary of Logistic Regression</h1><p class="page-description">Why is logistic regression so special?</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-04-15T00:00:00-05:00" itemprop="datePublished">
+        Apr 15, 2021
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Jae Kim</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/fastbook/categories/#logistic regression">logistic regression</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/fastbook/categories/#bernoulli distribution">bernoulli distribution</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/fastbook/categories/#likelihood">likelihood</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/disney-snoopy/fastbook/tree/master/_notebooks/2021-04-15-Logistic_regression.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/fastbook/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/disney-snoopy/fastbook/master?filepath=_notebooks%2F2021-04-15-Logistic_regression.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastbook/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/disney-snoopy/fastbook/blob/master/_notebooks/2021-04-15-Logistic_regression.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastbook/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-04-15-Logistic_regression.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation"> </a></h1><p>For many, logistic regression is the first classification algorithm they encounter in the world of data science. It is often described as a process of drawing a line to separate two groups of samples. Understanding statistical implication of logistic regression allows one to understand more sophisticated classification algorithm. This post aims to summarise the fundamentals of logistic regression in easy-to-understand bullet points.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="The-Essenstials">The Essenstials<a class="anchor-link" href="#The-Essenstials"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Logistic-regression-assumes-that-there-are-only-two-potential-outcomes.">Logistic regression assumes that there are only two potential outcomes.<a class="anchor-link" href="#Logistic-regression-assumes-that-there-are-only-two-potential-outcomes."> </a></h5>$$
+y \in \{0, 1\} \\
+$$<p>where y is dependent variable. y is also called target. When more than 2 categories are present, one vs rest approach can be used.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Logistic-regression-treats-y-as-a-random-variable-which-follows-Bernoulli-distribution.">Logistic regression treats y as a random variable which follows Bernoulli distribution.<a class="anchor-link" href="#Logistic-regression-treats-y-as-a-random-variable-which-follows-Bernoulli-distribution."> </a></h5>$$
+\begin{align}
+y|x;\theta &amp; \sim \text{Bernoulli}(\phi)\\
+P(y = 1) &amp; = \phi \\
+P(y = 0) &amp; = 1 - \phi
+\end{align}
+$$<p>where y is dependent variable, x is independent variable and $\phi$ is the probability for y being equal to 1.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Logistic-regression-outcome-predicts-logit-or-odd-ratio.">Logistic regression outcome predicts logit or odd ratio.<a class="anchor-link" href="#Logistic-regression-outcome-predicts-logit-or-odd-ratio."> </a></h5>$$
+logit = log \left(\frac{p}{1-p} \right) = \theta^T x
+$$<p>Logistic regression is often more clearly explained with the above equation. Logit or odd ratio is modeled as a linear expression. In turn, probability is a nonlinear function of the logit function.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Hypothesis-function-is-a-nonlinear-function-of-a-linear-function-of-x.">Hypothesis function is a nonlinear function of a linear function of x.<a class="anchor-link" href="#Hypothesis-function-is-a-nonlinear-function-of-a-linear-function-of-x."> </a></h5>$$
+\begin{align}
+h_{\theta}(x) = &amp; g(\theta^{T}x)\\
+= &amp; \frac{1}{1+e^{-\theta^{T}x}}
+\end{align}
+$$<p>The nonlinear function g(x) is also called sigmoid function. This specific nonlinear function leads to the gradient descent update rule identical to linear regression.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Logistic-regression-algorithm-is-a-process-of-maximum-likelihood-estimation-for-population-that-follow-Bernoulli-distribution.">Logistic regression algorithm is a process of maximum likelihood estimation for population that follow Bernoulli distribution.<a class="anchor-link" href="#Logistic-regression-algorithm-is-a-process-of-maximum-likelihood-estimation-for-population-that-follow-Bernoulli-distribution."> </a></h5><p>Bernoulli distribution is summarised in the following form:
+$
+\begin{align}
+P(y = 1) &amp; = \phi \\
+P(y = 0) &amp; = 1 - \phi
+\end{align}
+$
+Putting the above equations compactly,
+$$
+P(y|x;\theta) = (h_{\theta}(x))^y(1 - h_\theta(x))^{(1-y)}
+$$
+If we assume that the data points are sampled independently from each other, we can calculate the likelihood of the parameters. Likelihood can be represented as a product of the probabilities for all training samples.
+$$
+\begin{align}
+L(\theta) &amp; = P(\vec{y}|X;\theta) \\
+&amp; = \prod^{n}_{i = 1} p(y^{(i)}|x^{(i)};\theta) \\
+&amp; = \prod^{n}_{i = 1} (h_{\theta}(x^{(i)}))^{y^{(i)}} (1 - h_\theta(x^{(i)}))^{(1-y^{(i)})}
+\end{align}
+$$
+where $\vec{y}$ denotes all y samples.<br />
+Now we have the expression for the likelihood for the parameters $\theta$. Naturally, we'd like to approximate $\theta s$ that maximise the likelihood. We will do this by taking derivative of the likelihood estimation. In order to make the differentiation more straight forward, we will take log of the likelihood expression. Taking log transforms $\prod$ into $\sum$ which is much easier to differentiate. Because logarithm is a strictly monotonically increasing function, $\theta$s that maximise the log likelihood also maximises the likelihood funcion.</p>
+$$
+\begin{align}
+l(\theta) &amp; = log L(\theta) \\
+&amp; = \sum^{n}_{i=1} y^{(i)}(h_{\theta}(x^{(i)})) + (1-y^{(i)}) (1 - h_\theta(x^{(i)}))
+\end{align}
+$$<p>In order to solve for the derivative of the above expression, it is easier to first take derivative of sigmoid function which is inside the hypothesis function.
+$$
+\begin{align}
+g(z) &amp; = \frac{1}{1+e^{-z}} \\
+\frac{dg}{dz} &amp; = \frac{1}{\left( 1+e^{-z} \right)^2} e^{-z} \\
+&amp; = \frac{1}{1+e^{-z}} \left( 1 - \frac{1}{1+e^{-z}} \right) \\
+&amp; = g(z) \left( 1 - g(z) \right)
+\end{align}
+$$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now taking derivative of the log likelihood
+$$
+\begin{align}
+l(\theta) 
+&amp; = \sum^{n}_{i=1} y^{(i)}(h_{\theta}(x^{(i)})) + (1-y^{(i)}) (1 - h_\theta(x^{(i)})) \\
+&amp; = \sum^{n}_{i=1} y^{(i)}(g(\theta^{T}x)) + (1-y^{(i)}) (1 - g(\theta^{T}x))
+\end{align}
+$$</p>
+$$
+\begin{align}
+\frac{\delta}{\delta (\theta_j)} l(\theta) 
+&amp; = \left(y \frac{1}{g(\theta^{T}x)} - (1-y) \frac{1}{1 - g(\theta^Tx)} \right) \frac{\delta}{\delta \theta_j} g(\theta^{T} x)\\
+&amp; \text{Here use the expression for the derivative of sigmoid} \\
+&amp; = \left(y \frac{1}{g(\theta^{T}x)} - (1-y) \frac{1}{1 - g(\theta^Tx)} \right) \frac{\delta}{\delta \theta_j} g(\theta^{T} x)(1-g(\theta^{T} x)) \frac{\delta}{\delta \theta_j} \theta^Tx\\
+&amp; = \left( y(1-g(\theta^{T} x)) - (1-y)g(\theta^{T} x) \right) x_j\\
+&amp; = \left( y - g(\theta^{T} x) \right) x_j\\
+&amp; = (y-h_\theta(x))x_j
+\end{align}
+$$<p>Now we have all the ingredients for the update rule for $\theta$.
+$$
+\begin{align}
+\theta_j 
+&amp; := \theta_j + \alpha \nabla_{\theta_j} l(\theta_j) \\
+&amp; := \theta_j + \alpha (y^{(i)} - h_\theta(x^{(i)}))x_j^{(i)}
+\end{align}
+$$
+The update rule is identical to linear regression. This is the result of carefully choosing sigmoid as the nonlinear function within the hypothesis function. Linear regression and logistic regression are both members of a more broad family of models called generalised linear model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="What-do-the-logistic-regression-coefficients-actually-indicate?">What do the logistic regression coefficients actually indicate?<a class="anchor-link" href="#What-do-the-logistic-regression-coefficients-actually-indicate?"> </a></h5><p>As previously mentioned, logistic regression models log odd ratio as a linear equation.
+$$
+\begin{align}
+logit 
+&amp; = log \left(\frac{p}{1-p} \right) \\
+&amp; = \theta^T x \\
+&amp; = \theta_0 + \theta_1x_1 + \ldots + \theta_n x_n
+\end{align}
+$$
+where $\theta_0$ is the intercept, $\theta_1 \ldots \theta_n$ are regression coeffiecients and $x_1 \ldots x_n$ are features.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As it is clearly seen in the equations above, regression coefficients are linearly proportional to the logit function.<br />
+A unit change in the feature with the coefficient of $\theta$ changes the probability of positive prediction by $e^{\theta}$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Interpreting-logistic-regression-result.">Interpreting logistic regression result.<a class="anchor-link" href="#Interpreting-logistic-regression-result."> </a></h5><ul>
+<li><strong>Hypothesis for the overall model</strong><br />
+The null hypothesis states that all coefficients except the intercept are zero. A rejection of this hypothesis implies that at least one coefficient is not zero in the population. This in turns indicate that the regression model predicts the probability of the outcome better than the intercept only model. The intercept only model predicts the majority target.  The significance of the overall model is tested chi squared test of log likelihood ratio.</li>
+</ul>
+<ul>
+<li><strong>Hypothesis for each predictor (feature)</strong><br />
+The null hypothesis states that the predictor is a significant predictor of the outcome. This is commonly done by Wald test. A coefficient is divided by standard which gives z-score. Z-score allows us to calculate p-value.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Log-likelihood-ratio-test">Log likelihood ratio test<a class="anchor-link" href="#Log-likelihood-ratio-test"> </a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The LR test is performed by estimating two models and comparing the fit of one model to the fit of the other. Removing predictor variables from a model will almost always make the model fit less well (i.e., a model will have a lower log likelihood), but it is necessary to test whether the observed difference in model fit is statistically significant. The LR test does this by comparing the log likelihoods of the two models, if this difference is statistically significant, then the less restrictive model (the one with more variables) is said to fit the data significantly better than the more restrictive model. If one has the log likelihoods from the models, the LR test is fairly easy to calculate. The formula for the LR test statistic is:
+$$
+LR = -2ln\frac{L(m_1)}{L(m_2)} = 2(log(L(m_2)) - log(L(m_1)))
+$$
+Where  $L(m_n)$ denotes the likelihood of the respective model (either Model 1 or Model 2), and $log(L(m_n))$ the natural log of the model’s final likelihood (i.e., the log likelihood). Where $m_1$ is the more restrictive model, and $m_2$ is the less restrictive model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Walt-test">Walt test<a class="anchor-link" href="#Walt-test"> </a></h5><p>The Wald test works by testing the null hypothesis that a parameter is equal to 0. If the test fails to reject the null hypothesis, this suggests that removing the variable from the model will not substantially harm the fit of that model, since a predictor with a coefficient that is very small relative to its standard error is generally not doing much to help predict the dependent variable. The Wald test can be used to test multiple parameters simultaneously, while the tests typically printed in regression output only test one parameter at a time.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="disney-snoopy/fastbook"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/fastbook/logistic%20regression/bernoulli%20distribution/likelihood/2021/04/15/Logistic_regression.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/fastbook/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/fastbook/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/fastbook/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Explore and learn data science concepts with me.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/fastbook/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/fastbook/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
