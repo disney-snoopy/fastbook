@@ -219,22 +219,21 @@ Putting the above equations compactly,
 $$
 P(y|x;\theta) = (h_{\theta}(x))^y(1 - h_\theta(x))^{(1-y)}
 $$
-If we assume that the data points are sampled independently from each other, we can calculate the likelihood of the parameters. Likelihood can be represented as a product of the probabilities for all training samples.
+If we assume that the data points are sampled independently from each other, we can calculate the likelihood of the parameters. Likelihood can be represented as a product of the probabilities for all training samples.</p>
 $$
 \begin{align}
 L(\theta) &amp; = P(\vec{y}|X;\theta) \\
 &amp; = \prod^{n}_{i = 1} p(y^{(i)}|x^{(i)};\theta) \\
 &amp; = \prod^{n}_{i = 1} (h_{\theta}(x^{(i)}))^{y^{(i)}} (1 - h_\theta(x^{(i)}))^{(1-y^{(i)})}
 \end{align}
-$$
-where $\vec{y}$ denotes all y samples.<br />
+$$<p>where $\vec{y}$ denotes all y samples.<br />
 Now we have the expression for the likelihood for the parameters $\theta$. Naturally, we'd like to approximate $\theta s$ that maximise the likelihood. We will do this by taking derivative of the likelihood estimation. In order to make the differentiation more straight forward, we will take log of the likelihood expression. Taking log transforms $\prod$ into $\sum$ which is much easier to differentiate. Because logarithm is a strictly monotonically increasing function, $\theta$s that maximise the log likelihood also maximises the likelihood funcion.</p>
 $$
 \begin{align}
 l(\theta) &amp; = log L(\theta) \\
 &amp; = \sum^{n}_{i=1} y^{(i)}(h_{\theta}(x^{(i)})) + (1-y^{(i)}) (1 - h_\theta(x^{(i)}))
 \end{align}
-$$<p>In order to solve for the derivative of the above expression, it is easier to first take derivative of sigmoid function which is inside the hypothesis function.
+$$<p>In order to solve for the derivative of the above expression, it is easier to first take derivative of sigmoid function which is inside the hypothesis function.</p>
 $$
 \begin{align}
 g(z) &amp; = \frac{1}{1+e^{-z}} \\
@@ -242,22 +241,20 @@ g(z) &amp; = \frac{1}{1+e^{-z}} \\
 &amp; = \frac{1}{1+e^{-z}} \left( 1 - \frac{1}{1+e^{-z}} \right) \\
 &amp; = g(z) \left( 1 - g(z) \right)
 \end{align}
-$$</p>
-
+$$
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now taking derivative of the log likelihood
+<p>Now taking derivative of the log likelihood</p>
 $$
 \begin{align}
 l(\theta) 
 &amp; = \sum^{n}_{i=1} y^{(i)}(h_{\theta}(x^{(i)})) + (1-y^{(i)}) (1 - h_\theta(x^{(i)})) \\
 &amp; = \sum^{n}_{i=1} y^{(i)}(g(\theta^{T}x)) + (1-y^{(i)}) (1 - g(\theta^{T}x))
 \end{align}
-$$</p>
-$$
+$$$$
 \begin{align}
 \frac{\delta}{\delta (\theta_j)} l(\theta) 
 &amp; = \left(y \frac{1}{g(\theta^{T}x)} - (1-y) \frac{1}{1 - g(\theta^Tx)} \right) \frac{\delta}{\delta \theta_j} g(\theta^{T} x)\\
@@ -267,15 +264,14 @@ $$
 &amp; = \left( y - g(\theta^{T} x) \right) x_j\\
 &amp; = (y-h_\theta(x))x_j
 \end{align}
-$$<p>Now we have all the ingredients for the update rule for $\theta$.
+$$<p>Now we have all the ingredients for the update rule for $\theta$.</p>
 $$
 \begin{align}
 \theta_j 
 &amp; := \theta_j + \alpha \nabla_{\theta_j} l(\theta_j) \\
 &amp; := \theta_j + \alpha (y^{(i)} - h_\theta(x^{(i)}))x_j^{(i)}
 \end{align}
-$$
-The update rule is identical to linear regression. This is the result of carefully choosing sigmoid as the nonlinear function within the hypothesis function. Linear regression and logistic regression are both members of a more broad family of models called generalised linear model.</p>
+$$<p>The update rule is identical to linear regression. This is the result of carefully choosing sigmoid as the nonlinear function within the hypothesis function. Linear regression and logistic regression are both members of a more broad family of models called generalised linear model.</p>
 
 </div>
 </div>
