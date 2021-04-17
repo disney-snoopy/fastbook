@@ -175,11 +175,11 @@ $$<p>where y is dependent variable. y is also called target. When more than 2 ca
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Logistic-regression-treats-y-as-a-random-variable-which-follows-Bernoulli-distribution.">Logistic regression treats y as a random variable which follows Bernoulli distribution.<a class="anchor-link" href="#Logistic-regression-treats-y-as-a-random-variable-which-follows-Bernoulli-distribution."> </a></h5>$$
-\begin{align}
+\begin{aligned}
 y|x;\theta &amp; \sim \text{Bernoulli}(\phi)\\
 P(y = 1) &amp; = \phi \\
 P(y = 0) &amp; = 1 - \phi
-\end{align}
+\end{aligned}
 $$<p>where y is dependent variable, x is independent variable and $\phi$ is the probability for y being equal to 1.</p>
 
 </div>
@@ -197,10 +197,10 @@ $$<p>Logistic regression is often more clearly explained with the above equation
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Hypothesis-function-is-a-nonlinear-function-of-a-linear-function-of-x.">Hypothesis function is a nonlinear function of a linear function of x.<a class="anchor-link" href="#Hypothesis-function-is-a-nonlinear-function-of-a-linear-function-of-x."> </a></h5>$$
-\begin{align}
+\begin{aligned}
 h_{\theta}(x) = &amp; g(\theta^{T}x)\\
 = &amp; \frac{1}{1+e^{-\theta^{T}x}}
-\end{align}
+\end{aligned}
 $$<p>The nonlinear function g(x) is also called sigmoid function. This specific nonlinear function leads to the gradient descent update rule identical to linear regression.</p>
 
 </div>
@@ -210,10 +210,10 @@ $$<p>The nonlinear function g(x) is also called sigmoid function. This specific 
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Logistic-regression-algorithm-is-a-process-of-maximum-likelihood-estimation-for-population-that-follow-Bernoulli-distribution.">Logistic regression algorithm is a process of maximum likelihood estimation for population that follow Bernoulli distribution.<a class="anchor-link" href="#Logistic-regression-algorithm-is-a-process-of-maximum-likelihood-estimation-for-population-that-follow-Bernoulli-distribution."> </a></h5><p>Bernoulli distribution is summarised in the following form:
 $$
-\begin{align}
+\begin{aligned}
 P(y = 1) &amp; = \phi \\
 P(y = 0) &amp; = 1 - \phi
-\end{align}
+\end{aligned}
 $$
 Putting the above equations compactly,
 $$
@@ -221,26 +221,26 @@ P(y|x;\theta) = (h_{\theta}(x))^y(1 - h_\theta(x))^{(1-y)}
 $$
 If we assume that the data points are sampled independently from each other, we can calculate the likelihood of the parameters. Likelihood can be represented as a product of the probabilities for all training samples.</p>
 $$
-\begin{align}
+\begin{aligned}
 L(\theta) &amp; = P(\vec{y}|X;\theta) \\
 &amp; = \prod^{n}_{i = 1} p(y^{(i)}|x^{(i)};\theta) \\
 &amp; = \prod^{n}_{i = 1} (h_{\theta}(x^{(i)}))^{y^{(i)}} (1 - h_\theta(x^{(i)}))^{(1-y^{(i)})}
-\end{align}
+\end{aligned}
 $$<p>where $\vec{y}$ denotes all y samples.<br />
 Now we have the expression for the likelihood for the parameters $\theta$. Naturally, we'd like to approximate $\theta s$ that maximise the likelihood. We will do this by taking derivative of the likelihood estimation. In order to make the differentiation more straight forward, we will take log of the likelihood expression. Taking log transforms $\prod$ into $\sum$ which is much easier to differentiate. Because logarithm is a strictly monotonically increasing function, $\theta$s that maximise the log likelihood also maximises the likelihood funcion.</p>
 $$
-\begin{align}
+\begin{aligned}
 l(\theta) &amp; = log L(\theta) \\
 &amp; = \sum^{n}_{i=1} y^{(i)}(h_{\theta}(x^{(i)})) + (1-y^{(i)}) (1 - h_\theta(x^{(i)}))
-\end{align}
+\end{aligned}
 $$<p>In order to solve for the derivative of the above expression, it is easier to first take derivative of sigmoid function which is inside the hypothesis function.</p>
 $$
-\begin{align}
+\begin{aligned}
 g(z) &amp; = \frac{1}{1+e^{-z}} \\
 \frac{dg}{dz} &amp; = \frac{1}{\left( 1+e^{-z} \right)^2} e^{-z} \\
 &amp; = \frac{1}{1+e^{-z}} \left( 1 - \frac{1}{1+e^{-z}} \right) \\
 &amp; = g(z) \left( 1 - g(z) \right)
-\end{align}
+\end{aligned}
 $$
 </div>
 </div>
@@ -249,13 +249,13 @@ $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now taking derivative of the log likelihood</p>
 $$
-\begin{align}
+\begin{aligned}
 l(\theta) 
 &amp; = \sum^{n}_{i=1} y^{(i)}(h_{\theta}(x^{(i)})) + (1-y^{(i)}) (1 - h_\theta(x^{(i)})) \\
 &amp; = \sum^{n}_{i=1} y^{(i)}(g(\theta^{T}x)) + (1-y^{(i)}) (1 - g(\theta^{T}x))
-\end{align}
+\end{aligned}
 $$$$
-\begin{align}
+\begin{aligned}
 \frac{\delta}{\delta (\theta_j)} l(\theta) 
 &amp; = \left(y \frac{1}{g(\theta^{T}x)} - (1-y) \frac{1}{1 - g(\theta^Tx)} \right) \frac{\delta}{\delta \theta_j} g(\theta^{T} x)\\
 &amp; \text{Here use the expression for the derivative of sigmoid} \\
@@ -263,14 +263,14 @@ $$$$
 &amp; = \left( y(1-g(\theta^{T} x)) - (1-y)g(\theta^{T} x) \right) x_j\\
 &amp; = \left( y - g(\theta^{T} x) \right) x_j\\
 &amp; = (y-h_\theta(x))x_j
-\end{align}
+\end{aligned}
 $$<p>Now we have all the ingredients for the update rule for $\theta$.</p>
 $$
-\begin{align}
+\begin{aligned}
 \theta_j 
 &amp; := \theta_j + \alpha \nabla_{\theta_j} l(\theta_j) \\
 &amp; := \theta_j + \alpha (y^{(i)} - h_\theta(x^{(i)}))x_j^{(i)}
-\end{align}
+\end{aligned}
 $$<p>The update rule is identical to linear regression. This is the result of carefully choosing sigmoid as the nonlinear function within the hypothesis function. Linear regression and logistic regression are both members of a more broad family of models called generalised linear model.</p>
 
 </div>
@@ -280,12 +280,12 @@ $$<p>The update rule is identical to linear regression. This is the result of ca
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="What-do-the-logistic-regression-coefficients-actually-indicate?">What do the logistic regression coefficients actually indicate?<a class="anchor-link" href="#What-do-the-logistic-regression-coefficients-actually-indicate?"> </a></h5><p>As previously mentioned, logistic regression models log odd ratio as a linear equation.
 $$
-\begin{align}
+\begin{aligned}
 logit 
 &amp; = log \left(\frac{p}{1-p} \right) \\
 &amp; = \theta^T x \\
 &amp; = \theta_0 + \theta_1x_1 + \ldots + \theta_n x_n
-\end{align}
+\end{aligned}
 $$
 where $\theta_0$ is the intercept, $\theta_1 \ldots \theta_n$ are regression coeffiecients and $x_1 \ldots x_n$ are features.</p>
 
